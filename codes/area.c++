@@ -11,4 +11,4 @@ int main()
     cout << "circumference :"<< 2*3.14*r <<endl ;
     cout << "area :"<< 3.14*r*r <<endl;
     return 0;
-}
+};
