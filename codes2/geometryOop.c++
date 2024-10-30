@@ -10,7 +10,7 @@ public:
   double base;
 
 public:
-  int getHeight()
+  double getHeight()
   {
     cout << "Enter height: ";
     cin >> height;
@@ -22,7 +22,7 @@ public:
     }
     return height;
   }
-  int getwidth()
+  double getwidth()
   {
     cout << "Enter width: ";
     cin >> width;
@@ -34,7 +34,7 @@ public:
     }
     return width;
   }
-  int getraduis()
+  double getraduis()
   {
     cout << "Enter width: ";
     cin >> raduis;
@@ -46,7 +46,7 @@ public:
     }
     return raduis;
   }
-  int getbase()
+  double getbase()
   {
     cout << "Enter base: ";
     cin >> base;
@@ -80,23 +80,23 @@ int main()
   case 1:
   {
     Area circle;
-    int r = circle.getraduis();
+    double r = circle.getraduis();
     cout << "area of the circle is " << r * r * 22 / 7;
     break;
   }
   case 2:
   {
     Area rectangle;
-    int h = rectangle.getHeight();
-    int w = rectangle.getwidth();
+    double h = rectangle.getHeight();
+    double w = rectangle.getwidth();
     cout << "Rectangle area is: " << h * w;
     break;
   }
   case 3:
   {
     Area triangle;
-    int b = triangle.getbase();
-    int height = triangle.getHeight();
+    double b = triangle.getbase();
+    double height = triangle.getHeight();
     cout << "Triangle area is: " << 0.5 * b * height;
     break;
   }
