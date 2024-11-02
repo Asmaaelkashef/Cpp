@@ -73,7 +73,7 @@ class account {
 };
 
 int main(){
-  account a1(178417264912747 , 17000 , "bankAlahly");
-  a1.WithDraw(457);
+  account a1(178417264912747 , 20 , "bankAlahly");
+  a1.WithDraw(40);
   a1.print();
 };
