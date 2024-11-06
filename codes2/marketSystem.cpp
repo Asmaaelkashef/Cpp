@@ -1,9 +1,10 @@
 #include "iostream"
 #include "string.h"
-using namespace std ;
+using namespace std;
 
-class market {
-  private:
+class market
+{
+private:
   long ID;
   string name;
   double price;
@@ -11,8 +12,8 @@ class market {
   string expireDate;
   double quantity;
 
-  public:
-  market()//defult constructor 
+public:
+  market() // defult constructor
   {
     ID = 0;
     name = "";
@@ -21,7 +22,7 @@ class market {
     expireDate = "";
     quantity = 0;
   }
-  void setData(long cid , double cprice , double cprofit , string cexpireDate, double cquantity, string cname)
+  void setData(long cid, double cprice, double cprofit, string cexpireDate, double cquantity, string cname)
   {
     ID = cid;
     price = cprice;
@@ -31,17 +32,17 @@ class market {
     name = cname;
   }
 
-  long getId () { return ID ;}
-  string getname () { return name ;}
-  double getprice () { return price ;}
-  double getProfit () { return profit ;}
-  string getexpireDate () { return expireDate ;}
-  double getQuantity () { return quantity ;}
+  long getId() { return ID; }
+  string getname() { return name; }
+  double getprice() { return price; }
+  double getProfit() { return profit; }
+  string getexpireDate() { return expireDate; }
+  double getQuantity() { return quantity; }
 
-// عشان نحسب السحب ومنطلعش حاجة بالسالب لو السحب اكبر من الكمية الي عندي
+  // عشان نحسب السحب ومنطلعش حاجة بالسالب لو السحب اكبر من الكمية الي عندي
   double withdraw(double amount)
   {
-    if(quantity >= amount)
+    if (quantity >= amount)
     {
       quantity -= amount;
       return amount;
@@ -52,7 +53,7 @@ class market {
       return 0;
     }
   }
-  //عشان احسب الشراء 
+  // عشان احسب الشراء
   double deposite(double amount)
   {
     quantity += amount;
@@ -60,11 +61,12 @@ class market {
   }
   void calcInterst()
   {
-    profit = profit + profit*0.10;
+    profit = profit + profit * 0.10;
   }
 };
 
-int main(){
+int main()
+{
   market m;
   m.setData(12334, 50, 25, "25/7/2025", 100, "cheese");
   cout << "ID: " << m.getId() << endl;
