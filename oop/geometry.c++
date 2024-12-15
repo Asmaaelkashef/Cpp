@@ -10,7 +10,7 @@ public:
   double base;
 
 public:
-  double getHeight()
+  double setHeight()
   {
     cout << "Enter height: ";
     cin >> height;
@@ -22,7 +22,7 @@ public:
     }
     return height;
   }
-  double getwidth()
+  double setwidth()
   {
     cout << "Enter width: ";
     cin >> width;
@@ -87,8 +87,8 @@ int main()
   case 2:
   {
     Area rectangle;
-    double h = rectangle.getHeight();
-    double w = rectangle.getwidth();
+    double h = rectangle.setHeight();
+    double w = rectangle.setwidth();
     cout << "Rectangle area is: " << h * w;
     break;
   }
@@ -96,7 +96,7 @@ int main()
   {
     Area triangle;
     double b = triangle.getbase();
-    double height = triangle.getHeight();
+    double height = triangle.setHeight();
     cout << "Triangle area is: " << 0.5 * b * height;
     break;
   }
