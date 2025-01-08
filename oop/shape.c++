@@ -1,57 +1,99 @@
-#include <iostream>
+#include "iostream"
 using namespace std;
-class shape
-{
-protected:
-  double perim;
 
-public:
-  void setdata( double per)
-  {
-    perim = per ;
-  }
-  void showdata();
-  double getPerim();
+class shape{
+  protected:
+    double perim;
+
+  public:
+   virtual void setData(double x, double y , double z) = 0;
+   virtual void showData() = 0;
+   virtual double getPerim() = 0;
 };
 
 class rectangle : public shape
 {
-private:
+  protected:
   double length, width;
 
-public:
-  rectangle()
-  {
-    length = 0;
-    width = 0;
-    if (length <= 0 || width <= 0)
-    {
-      cout << "Invalid input. Length and width must be positive. " << endl;
-    }
-  }
-  void setdata()
-  {
-    cout << "Enter length and width: ";
-    cin >> length >> width;
-  }
-  void showdata()
-  {
-    cout << "Length: " << length << endl
-         << "Width: " << width << endl;
-  }
-  double getwidth() { return width; }
-  double getlength() { return length; }
-  double getPerim()
-  {
-    return 2 * (length + width);
-  }
+  public:
+   void setData(double x, double y , double z)
+   {
+     length = x;
+     width = y;
+   }
+   void showData()
+   {
+     cout << "Length: " << length << endl;
+     cout << "Width: " << width << endl;
+   }
+   double getPerim()
+   {
+     perim = 2*(length + width);
+     return perim;
+   }
+};
+
+class triangle : public shape
+{
+  private:
+  double side1 ,  side2 , side3 ;
+
+  public:
+   void setData(double x, double y, double z)
+   {
+     side1 = x;
+     side2 = y;
+     side3 = z;
+   }
+   void showData()
+   {
+     cout << "Side 1: " << side1 << endl;
+     cout << "Side 2: " << side2 << endl;
+     cout << "Side 3: " << side3 << endl;
+   }
+   double getPerim()
+   {
+     return side1 + side2 + side3;
+   }
 };
 
 int main()
 {
-  rectangle r;
-  r.setdata();
-  r.showdata();
-  cout << "Perimeter of rectangle: " << r.getPerim() << endl;
-  return 0;
+  shape* ptr[5];
+  rectangle obj[5];
+  triangle obj2[5];
+  double length , width , height;
+
+  for (int i = 0; i < 5; i++)
+  {
+    cout << "shape is rectangle or triangle , 1 for rectangle, 2 for triangle" << endl;
+    int choice;
+    cin >> choice;
+    if (choice == 1)
+    {
+      ptr[i] = &obj[i];
+      cout << "enter length : " << endl;
+      cin >> length;
+      cout << "enter width : " << endl;
+      cin >> width;
+      ptr[i] -> setData(length , width , 0);
+    }
+    if (choice == 2)
+    {
+      ptr[i] = &obj2[i];
+      cout << "enter length : " << endl;
+      cin >> length;
+      cout << "enter width : " << endl;
+      cin >> width;
+      cout << "enter height : " << endl;
+      cin >> height;
+      ptr[i] -> setData(length , width , height);
+    }
+  }
+  cout << "\n Data of all shapes:" << endl;
+    for (int i = 0; i < 5; i++) {
+            ptr[i]->showData();
+            cout << "Perimeter: " << ptr[i]->getPerim() << endl;
+    }
 }
