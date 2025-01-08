@@ -1,8 +1,3 @@
- 
-// Inside the main function create an array of three objects, of type Budget (each object 
-// represents a division in the company), then by using for loop enter the values for the data 
-// members then print them again by using another for loop.  
-
 
 #include<iostream>
 using namespace std;
@@ -46,6 +41,7 @@ int main() {
    for (int i = 0; i < 3 ; i++) 
    {
      cout << "Division Budget for division " << i+1 << ": " << obj[i].getDivisionBudget() << endl;
-     cout << "Company Budget for division " << i+1 << ": " << obj[i].getComBudget() << endl;
+    // cout << "Company Budget for division " << i+1 << ": " << obj[i].getComBudget() << endl;
    }
+   cout << "Company Budget for division " << i+1 << ": " << obj[i].getComBudget() << endl;
 }
