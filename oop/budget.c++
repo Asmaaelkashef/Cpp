@@ -43,5 +43,5 @@ int main() {
      cout << "Division Budget for division " << i+1 << ": " << obj[i].getDivisionBudget() << endl;
     // cout << "Company Budget for division " << i+1 << ": " << obj[i].getComBudget() << endl;
    }
-   cout << "Company Budget for division " << i+1 << ": " << obj[i].getComBudget() << endl;
+   cout << "Company Budget for division " <<  ": " << obj[2].getComBudget() << endl;
 }
