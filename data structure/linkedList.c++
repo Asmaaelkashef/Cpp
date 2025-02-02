@@ -6,6 +6,21 @@ class Node
 public:
   int data;
   Node *next;
+
+  Node()
+  {
+    next = 0;
+  }
+  Node(int d)
+	{
+		data=d;
+		next=0;
+	}
+	Node(int d, Node* p)
+	{
+		data=d;
+		next=p;
+	}
 };
 
 class LinkedList
