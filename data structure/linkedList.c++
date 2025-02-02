@@ -44,7 +44,7 @@ public:
   }
   int counter()
   {
-    int counter = 0; //initialize counter
+    int counter = 0;   // initialize counter
     Node *temp = head; // عملت نود احتياطي بديل عن الهيد
     while (temp != NULL)
     {
@@ -61,9 +61,20 @@ public:
     {
       if (temp->data == key)
         found = true;
-       else temp = temp->next;
+      else
+        temp = temp->next;
     }
     return false; // fun is boolean
+  }
+  ~LinkedList()
+  {
+     Node *p = head, *q ;
+    while (p != NULL)
+    {
+      q = p->next;
+      delete p;
+      p = q;
+    }
   }
 };
 int main()
@@ -94,5 +105,5 @@ int main()
     cout << "item found in the list ";
   else
     cout << "item not found in the list ";
-    return 0;
+  return 0;
 }
