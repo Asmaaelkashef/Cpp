@@ -9,13 +9,14 @@ public:
   int rear;
   int queue[maxsize];
 
-  Queue()
+  Queue() // because using array & start from 0
   {
     front = -1;
     rear = -1;
   }
   void enqueue(int element)
   {
+    //check queue is not full
     if (rear != maxsize - 1)
     {
       if (front == -1 && rear == -1) // queue is empty
@@ -35,10 +36,11 @@ public:
   }
   int dequeue()
   {
+    //check queue isnt empty
     if (front != -1 && rear != -1 && front <= rear)
     {
       int element = queue[front]; // dequeue from the start
-      if (front == rear)          // check if last element
+      if (front == rear)          
       {
         front = -1;
         rear = -1;

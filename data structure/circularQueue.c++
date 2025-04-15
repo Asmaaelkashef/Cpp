@@ -1,12 +1,11 @@
-#include <stdio.h>
 #include <iostream>
 using namespace std;
-#define MAX 3
+#define MAX 5
 
 class Queue
 {
 public:
-  int data[MAX];
+  int queue[MAX];
   int front;
   int rear;
 
@@ -15,93 +14,117 @@ public:
     front = -1;
     rear = -1;
   }
-  int isEmpty()
+
+  bool isEmpty()
   {
-    if (front = rear == -1)
-      return 1;
-    return 0;
+    return (front == -1 && rear == -1);
   }
+
   void enqueue(int element)
   {
-    if (front == 0 && rear == MAX - 1)
-      cout << "Queue Overflow";
-    else if (front == -1 && rear == -1) // queue is empty
+    if ((front == 0 && rear == MAX - 1) || (rear == front - 1))
+    {
+      cout << "Queue Overflow\n";
+    }
+    if (front == -1 && rear == -1)
     {
       front = rear = 0;
-      data[rear] = element;
+      queue[rear] = element;
     }
-    else if (rear == MAX - 1)
+    else if (rear == MAX - 1 && front != 0)
     {
       rear = 0;
-      data[rear] = element;
+      queue[rear] = element;
+      if (rear != front - 1)
+        rear++; // في حالة في مكانين فاضيين او اكتر في الاول
     }
     else
     {
-      rear++;
-      data[rear] = element;
+      queue[++rear] = element;
     }
   }
+
   int dequeue()
   {
-    int x;
-    if (front == -1 && rear == -1)
-      cout << "Queue Underflow";
+    if (isEmpty())
+    {
+      cout << "Queue Underflow\n";
+      return -1;
+    }
+
+    int data = queue[front];
+
+    if (front == rear)
+    {
+      front = rear = -1;
+    }
+    else if (front == MAX - 1)
+    {
+      front = 0;
+    }
     else
     {
-      x = data[front];
-      if (front == rear) // only one element in queue
-        front = rear = -1;
-      else if (front == MAX - 1)
-        front = 0;
-      else
-        front++;
-      return x;
+      front++;
     }
+    return data;
   }
-  void PrintQueue()
-		{
-			int f = front, r = rear;
-			if(front == -1 && rear == -1 )
-				cout << "Queue is Empty";
-			else if(front == rear)
-				cout << "\t" << data[front];
-			else if (f <= r)
-				{
-					while(f<=r)
-					{
-						cout << "\t" << data[f];
-						f++;
-					}
-				}
-			else
-			{
-				while(f <= MAX-1)
-					{
-						cout << "\t" << data[f];
-						f++;
-					}
-					f=0;
-					while(f<=r)
-					{
-						cout << "\t" << data[f] ;
-						f++;
-					}
-				
-			}	
-			cout << "\n";
-		}		
-};
 
+  void PrintQueue(string msg)
+  {
+    cout << msg << "\n";
+
+    if (isEmpty())
+    {
+      cout << "Queue is Empty\n";
+      return;
+    }
+
+    if (front <= rear)
+    {
+      for (int i = front; i <= rear; i++)
+      {
+        cout << queue[i];
+        if (i == front)
+          cout << " <-- front";
+        if (i == rear)
+          cout << " <-- rear";
+        cout << endl;
+      }
+    }
+    else
+    {
+      // بنطبعها علي جزئين
+      for (int i = front; i < MAX; i++)
+      {
+        cout << queue[i];
+        if (i == front)
+          cout << " <-- front";
+        cout << endl;
+      }
+      for (int i = 0; i <= rear; i++)
+      {
+        cout << queue[i];
+        if (i == rear)
+          cout << " <-- rear";
+        cout << endl;
+      }
+    }
+    cout << "\n";
+  }
+};
 int main()
 {
-	Queue q;
-	q.enqueue(1);
-	q.enqueue(2);
-	q.enqueue(3);
-	q.PrintQueue();
-	q.dequeue();
-	q.enqueue(4);
-	q.enqueue(6);
-	q.PrintQueue();
+  Queue q;
+  q.enqueue(1);
+  q.enqueue(2);
+  q.enqueue(3);
+  q.enqueue(8);
+  q.enqueue(5);
+  q.enqueue(9);
+  q.PrintQueue("Queue after inserting 1, 2, 3, 8, 5:");
+  q.dequeue();
+  q.PrintQueue("Queue after deleting one element:");
+  q.enqueue(4);
+  q.enqueue(6);
+  q.PrintQueue("Final Queue:");
 }
-
