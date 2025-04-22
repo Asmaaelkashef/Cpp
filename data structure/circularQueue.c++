@@ -22,26 +22,25 @@ public:
 
   void enqueue(int element)
   {
-    if ((front == 0 && rear == MAX - 1) || (rear == front - 1))
+    if ((front == 0 && rear == MAX - 1) || (rear + 1 == front))
     {
       cout << "Queue Overflow\n";
+      return ; //without , code will continue
     }
+
     if (front == -1 && rear == -1)
     {
       front = rear = 0;
-      queue[rear] = element;
     }
     else if (rear == MAX - 1 && front != 0)
     {
-      rear = 0;
-      queue[rear] = element;
-      if (rear != front - 1)
-        rear++; // في حالة في مكانين فاضيين او اكتر في الاول
+      rear = 0; 
     }
     else
     {
-      queue[++rear] = element;
-    }
+      rear++;
+    } 
+    queue[rear] = element;
   }
 
   int dequeue()
