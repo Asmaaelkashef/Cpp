@@ -12,66 +12,64 @@ public:
     next = 0;
   }
   Node(int d)
-	{
-		data=d;
-		next=0;
-	}
-	Node(int d, Node* p)
-	{
-		data=d;
-		next=p;
-	}
+  {
+    data = d;
+    next = 0;
+  }
+  Node(int d, Node *p)
+  {
+    data = d;
+    next = p;
+  }
+  ~Node()
+  {
+    cout << "NODES deleted \n";
+  }
 };
 
 class LinkedList
 {
 public:
   Node *head;
-  LinkedList() { head = NULL; }
+  LinkedList()
+  {
+    head = NULL;
+  }
   bool isEmpty()
   {
     return (head == NULL);
   }
   void insertFirst(int newvalue)
   {
-    Node *newNode = new Node(); // بوينتر من الكلاس نود
+    Node *newNode = new Node();
     newNode->data = newvalue;
-
     if (isEmpty())
     {
-      newNode->next = NULL; // عشان لو الليست فاضية
+      newNode->next = NULL;
       head = newNode;
     }
     else
     {
-      newNode->next = head; // لو كان في فعلا في الليست بخلي النيكست بيساوي عنوان اول واحدة الي هي كانت الهيد
-      head = newNode;       // بظبط الهيد الجديدة
+      newNode->next = head;
+      head = newNode;
     }
   }
-  void display()
+  void insertLast(int newvalue)
   {
-    Node *temp = head; // عملت نود احتياطي بديل عن الهيد
-    while (temp != NULL)
+    Node *newNode = new Node;
+    newNode->data = newvalue;
+    Node *q = head;
+    while (q->next != NULL)
     {
-      cout << temp->data << " ";
-      temp = temp->next; // عشان اخلي النود ينتقل للي بعده
+      q = q->next;
     }
-  }
-  int counter()
-  {
-    int counter = 0;   // initialize counter
-    Node *temp = head; // عملت نود احتياطي بديل عن الهيد
-    while (temp != NULL)
-    {
-      counter++;
-      temp = temp->next; // عشان اخلي النود ينتقل للي بعده
-    }
-    return counter;
+    q->next = newNode;
+    newNode->next = NULL;
   }
   bool isFound(int key)
   {
     bool found = false;
-    Node *temp = head; // عملت نود احتياطي بديل عن الهيد
+    Node *temp = head;
     while (temp != NULL)
     {
       if (temp->data == key)
@@ -79,11 +77,80 @@ public:
       else
         temp = temp->next;
     }
-    return false; // fun is boolean
+    return false;
+  }
+  int deleteFromHead()
+  {
+    int x;
+    if (isEmpty())
+    {
+      cout << "list Empty";
+    }
+    else if (head->next == NULL)
+    {
+      x = head->data;
+      delete head;
+      return x;
+    }
+    else
+    {
+      Node *p = head;
+      head = head->next;
+      x = p->data;
+      delete p;
+      return x;
+    }
+  }
+  int deleteFromTail()
+  {
+    int x;
+    if (head == NULL)
+    {
+      cout << "list Empty";
+    }
+    else if (head->next == NULL)
+    {
+      x = head->data;
+      delete head;
+      return x;
+    }
+    else
+    {
+      Node *p = head, *q;
+      while (p->next != NULL)
+      {
+        q = p;
+        p = p->next;
+      }
+      x = p->data;
+      delete p;
+      q->next = 0;
+      return x;
+    }
+  }
+  void printList()
+  {
+    Node *temp = head;
+    while (temp != NULL)
+    {
+      cout << temp->data << " ";
+      temp = temp->next;
+    }
+  }
+  int countList()
+  {
+    int countList = 0; // initialize countList
+    Node *temp = head; // عملت نود احتياطي بديل عن الهيد
+    while (temp != NULL)
+    {
+      countList++;
+      temp = temp->next; // عشان اخلي النود ينتقل للي بعده
+    }
+    return countList;
   }
   ~LinkedList()
   {
-     Node *p = head, *q ;
+    Node *p = head, *q;
     while (p != NULL)
     {
       q = p->next;
@@ -98,7 +165,7 @@ int main()
   if (list.isEmpty())
     cout << " list is empty ";
   else
-    cout << " list contains " << list.counter();
+    cout << " list contains " << list.countList();
 
   cout << "\n--------------------------------\n";
 
@@ -110,8 +177,8 @@ int main()
     list.insertFirst(item);
   }
   cout << "After inserting items in the list : \n";
-  list.display();
-  cout << " after insert , list contains " << list.counter();
+  list.printList();
+  cout << " after insert , list contains " << list.countList();
 
   cout << "\n enter item to search in the list : \n";
   int item;
@@ -120,5 +187,8 @@ int main()
     cout << "item found in the list ";
   else
     cout << "item not found in the list ";
+
+  list.deleteFromHead();
+  list.deleteFromTail();
   return 0;
 }
