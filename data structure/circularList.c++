@@ -21,6 +21,10 @@ public:
     data = d;
     next = p;
   }
+  ~Node()
+  {
+
+  }
 };
 
 class Circularlist
@@ -30,6 +34,10 @@ public:
   Circularlist()
   {
     head = NULL;
+  }
+  bool isEmpty()
+  {
+    return (head == NULL);
   }
   void addToHead(int item)
   {
