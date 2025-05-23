@@ -9,20 +9,25 @@ public:
   int rear;
   int queue[maxsize];
 
-  Queue() // because using array & start from 0
+  Queue()
   {
     front = -1;
     rear = -1;
   }
+
+  bool isEmpty()
+  {
+    return front == -1 && rear == -1;
+  }
+
   void enqueue(int element)
   {
-    //check queue is not full
     if (rear != maxsize - 1)
     {
-      if (front == -1 && rear == -1) // queue is empty
+      if (isEmpty())
       {
-        front++;                 // to set front & rear to point
-        queue[++rear] = element; // insert from end
+        front = 0;
+        queue[++rear] = element;
       }
       else
       {
@@ -31,16 +36,16 @@ public:
     }
     else
     {
-      cout << "queue is full . \n";
+      cout << "Queue is full.\n";
     }
   }
+
   int dequeue()
   {
-    //check queue isnt empty
-    if (front != -1 && rear != -1 && front <= rear)
+    if (!isEmpty() && front <= rear)
     {
-      int element = queue[front]; // dequeue from the start
-      if (front == rear)          
+      int element = queue[front];
+      if (front == rear)
       {
         front = -1;
         rear = -1;
@@ -53,33 +58,45 @@ public:
     }
     else
     {
-      cout << "queue is empty ! \n ";
+      cout << "Queue is empty!\n";
+      return -1; // إشارة إلى أن الطابور فارغ
     }
   }
+
   int peek()
   {
-    if (front == -1 && rear == -1)
+    if (isEmpty())
     {
-      cout << " queue is empty ! \n";
+      cout << "Queue is empty!\n";
+      return -1;
     }
     else
     {
       return queue[front];
     }
   }
+
   void display(string msg)
   {
     cout << msg << "\n";
-    if (front == -1 && rear == -1)
+    if (isEmpty())
     {
-      cout << " queue is empty ! \n";
+      cout << "Queue is empty!\n";
     }
-    cout << queue[front] << " <-- front" << endl;
-    for (int i = front + 1; i < rear; i++)
+    else
     {
-      cout << queue[i] << endl;
+      for (int i = front; i <= rear; i++)
+      {
+        if (i == front && i == rear)
+          cout << queue[i] << " <-- front & rear\n";
+        else if (i == front)
+          cout << queue[i] << " <-- front\n";
+        else if (i == rear)
+          cout << queue[i] << " <-- rear\n";
+        else
+          cout << queue[i] << endl;
+      }
     }
-    cout << queue[rear] << " <-- rear" << endl;
   }
 };
 
@@ -90,14 +107,21 @@ int main()
   queue.enqueue(20);
   queue.enqueue(30);
   queue.enqueue(40);
-  queue.display("Queue after inserting 10 20 30 and 40");
+  queue.display("Queue after inserting 10, 20, 30, and 40:");
+
   queue.enqueue(50);
-  queue.display("Queue after inserting 50");
+  queue.display("Queue after inserting 50:");
+
   int element = queue.peek();
-  cout << "Peek element returned " << element << endl;
+  cout << "Peek element returned: " << element << endl;
+
   element = queue.dequeue();
-  cout << "Dequeue element returned " << element << endl;
+  cout << "Dequeue element returned: " << element << endl;
+
   element = queue.dequeue();
-  cout << "Dequeue element returned " << element << endl;
-  queue.display("Queue after removing two elements");
+  cout << "Dequeue element returned: " << element << endl;
+
+  queue.display("Queue after removing two elements:");
+
+  return 0;
 }

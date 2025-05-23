@@ -25,7 +25,7 @@ public:
     if ((front == 0 && rear == MAX - 1) || (rear + 1 == front))
     {
       cout << "Queue Overflow\n";
-      return ; //without , code will continue
+      return; // without , code will continue
     }
 
     if (front == -1 && rear == -1)
@@ -34,12 +34,12 @@ public:
     }
     else if (rear == MAX - 1 && front != 0)
     {
-      rear = 0; 
+      rear = 0;
     }
     else
     {
       rear++;
-    } 
+    }
     queue[rear] = element;
   }
 
@@ -84,9 +84,13 @@ public:
       {
         cout << queue[i];
         if (i == front)
+        {
           cout << " <-- front";
+        }
         if (i == rear)
+        {
           cout << " <-- rear";
+        }
         cout << endl;
       }
     }

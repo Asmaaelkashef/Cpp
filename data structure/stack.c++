@@ -16,7 +16,7 @@ class Stack
   {
     if ( top == MAXSIZE - 1 )
     {
-      cout << " stack is overflowed" << endl;
+      cout << " stack is full" << endl;
     }
     else
     {
@@ -27,11 +27,12 @@ class Stack
   {
     if ( top == -1 )
     {
-      cout << "stack is underflowed" << endl;
+      cout << "stack is empty" << endl;
+      return -1 ;
     }
     else
     {
-      int value = data[top--];
+      return data[top--];
     }
   }
   int topElement()
