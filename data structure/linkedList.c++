@@ -22,8 +22,16 @@ public:
   bool isEmpty() { return head == NULL; }
   void insertFirst(int newvalue)
   {
-    Node *newNode = new Node(newvalue, head);
-    head = newNode;
+    Node *newNode = new Node(newvalue);
+    if (isEmpty())
+    {
+      head = newNode;
+    }
+    else
+    {
+      newNode->next = head;
+      head = newNode;
+    }
   }
   void insertLast(int newvalue)
   {
@@ -33,7 +41,7 @@ public:
     else
     {
       Node *q = head;
-      while (q->next)
+      while (q->next != NULL)
         q = q->next;
       q->next = newNode;
     }
@@ -41,7 +49,7 @@ public:
   bool isFound(int key)
   {
     Node *temp = head;
-    while (temp)
+    while (temp != NULL)
     {
       if (temp->data == key)
         return true;
@@ -69,15 +77,15 @@ public:
       cout << "list Empty";
       return -1;
     }
-    if (!head->next)
+    if (head->next = NULL)
     {
       int x = head->data;
       delete head;
       head = NULL;
       return x;
     }
-    Node *p = head, *q = NULL;
-    while (p->next)
+    Node *p = head, *q;
+    while (p->next != NULL)
     {
       q = p;
       p = p->next;
@@ -90,17 +98,18 @@ public:
   void printList()
   {
     Node *temp = head;
-    while (temp)
+    while (temp->next != NULL)
     {
       cout << temp->data << " ";
       temp = temp->next;
     }
+    cout << temp->data << " ";
   }
   int countList()
   {
-    int cnt = 0;
+    int cnt = 1;
     Node *temp = head;
-    while (temp)
+    while (temp->next != NULL)
     {
       cnt++;
       temp = temp->next;
@@ -110,10 +119,12 @@ public:
   int getMinimum()
   {
     if (isEmpty())
+    {
       return -1;
+    }
     int minVal = head->data;
     Node *temp = head->next;
-    while (temp)
+    while (temp != NULL)
     {
       if (temp->data < minVal)
         minVal = temp->data;
@@ -125,7 +136,7 @@ public:
   {
     int sum = 0;
     Node *temp = head;
-    while (temp)
+    while (temp != NULL)
     {
       if (temp->data % 2)
         sum += temp->data;
@@ -137,7 +148,7 @@ public:
   {
     LinkedList newList;
     Node *temp = head;
-    while (temp)
+    while (temp!= NULL)
     {
       newList.insertLast(temp->data);
       temp = temp->next;
@@ -147,7 +158,7 @@ public:
   ~LinkedList()
   {
     Node *p = head, *q;
-    while (p)
+    while (p->next != 0)
     {
       q = p->next;
       delete p;
@@ -159,6 +170,7 @@ public:
 int main()
 {
   LinkedList list;
+  int item;
   if (list.isEmpty())
     cout << " list is empty ";
   else
@@ -166,25 +178,28 @@ int main()
   cout << "\n--------------------------------\n";
   for (int i = 0; i < 4; i++)
   {
-    cout << "enter item to insert in the list : \n";
+    cout << "enter item to insert in the list :\n";
     int item;
     cin >> item;
     list.insertFirst(item);
   }
-  cout << "After inserting items in the list : \n";
+  cout << "After inserting items in the list :\n";
   list.printList();
-  cout << "\n after insert , list contains " << list.countList();
-  cout << "\n enter item to search in the list : \n";
-  int item;
+  cout << "\nafter insert , list contains " << list.countList();
+  cout << "\nenter item to search in the list : \n";
   cin >> item;
   if (list.isFound(item))
+  {
     cout << "item found in the list ";
+  }
   else
+  {
     cout << "item not found in the list ";
-  cout << "\n minimum item in the list : " << list.getMinimum();
-  cout << "\n sum of odd items in the list : " << list.sumOdd();
+  }
+  cout << "\nminimum item in the list : " << list.getMinimum();
+  cout << "\nsum of odd items in the list : " << list.sumOdd();
   LinkedList copiedList = list.copyList();
-  cout << "\n copied list is : ";
+  cout << "\ncopied list is : ";
   copiedList.printList();
   list.deleteFromHead();
   list.deleteFromTail();
