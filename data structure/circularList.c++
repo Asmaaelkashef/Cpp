@@ -23,7 +23,6 @@ public:
   }
   ~Node()
   {
-
   }
 };
 
@@ -83,11 +82,12 @@ public:
   void printList()
   {
     Node *node = head;
-    do
+    while (node->next != head)
     {
       cout << node->data << " ";
       node = node->next;
-    } while (node != head);
+    };
+    cout << node->data << " ";
   }
   int countList()
   {
@@ -147,7 +147,7 @@ public:
     else
     {
       Node *p = head, *q;
-      while (p->next != head) 
+      while (p->next != head)
       {
         q = p;
         p = p->next;
@@ -164,22 +164,22 @@ int main()
   Circularlist list;
 
   list.addToHead(5);
-  list.addToHead(6);
-  list.addToHead(7);
-  list.addToHead(8);
-  list.addToHead(9);
-  cout << "List Nodes: " << list.countList() << "  -->  ";
+  list.addToTail(6);
+  list.addToTail(7);
+  list.addToTail(8);
+  list.addToTail(9);
+  cout << "\nnumber of Nodes in list : " << list.countList() << "  -->  ";
   list.printList();
 
   list.addToTail(10);
   list.addToTail(11);
   list.addToTail(12);
-  cout << "List Nodes: " << list.countList() << "  -->  ";
+  cout << "\nnumber of Nodes in list : " << list.countList() << "  -->  ";
   list.printList();
 
   list.deleteFromHead();
   list.deleteFromHead();
-  cout << "List Nodes: " << list.countList() << "  -->  ";
+  cout << "\nnumber of Nodes in list : " << list.countList() << "  -->  ";
   list.printList();
 
   return 0;
