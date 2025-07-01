@@ -160,6 +160,18 @@ public:
       p = p->next; // لو ملاقيناهوش ف نعدي عاللي بعده
     }
   }
+  bool isFound(int val)
+  {
+    Node *temp = head;
+    while (temp != NULL)
+    {
+      if (temp->data == val)
+        return true;
+      temp = temp->next;
+    }
+    return false;
+  }
+
   void printList()
   {
     Node *p = head;

@@ -157,6 +157,53 @@ public:
       q->next = head;
     }
   }
+  void deleteItem(int value)
+  {
+    if (head == NULL)
+    {
+      cout << " list is empty ";
+    }
+    Node *p = head;
+    Node *q;
+    if (head->data == value)
+    {
+      if (head->next == head)
+      {
+        delete head;
+        head = NULL;
+      }
+      Node *last = head;
+      while (last->next != head)
+        last = last->next;
+      Node *temp = head;
+      head = head->next; // نحدث الهيد
+      last->next = head; // نربط آخر نود بالهيد الجديد
+      delete temp;       // نحذف القديم
+      return;
+    }
+    while (p != head && p->data != value)
+    {
+      p = q;
+      p = p->next;
+    };
+    if (p == head)
+      return;
+    q->next = p->next;
+    delete p;
+  }
+  bool isFound(int value)
+  {
+    if (head == NULL)
+      return false; 
+    Node *temp = head;
+    while (temp != head)
+    {
+      if (temp->data == value)
+        return true; 
+      temp = temp->next;
+    } ; 
+    return false; 
+  }
 };
 
 int main()

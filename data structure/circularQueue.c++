@@ -68,6 +68,16 @@ public:
     return data;
   }
 
+  int size()
+  {
+    if (isEmpty())
+      return 0;
+    if (rear >= front)
+      return rear - front + 1;
+    else
+      return MAX - front + rear + 1;
+  }
+
   void PrintQueue(string msg)
   {
     cout << msg << "\n";

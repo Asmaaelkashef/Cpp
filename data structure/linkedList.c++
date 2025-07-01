@@ -36,6 +36,7 @@ public:
   void insertLast(int newvalue)
   {
     Node *newNode = new Node(newvalue);
+    newNode->next = NULL;
     if (isEmpty())
       head = newNode;
     else
@@ -57,6 +58,30 @@ public:
     }
     return false;
   }
+  void deleteItem(int value)
+  {
+    Node *temp = head , *q;
+    if (head == NULL)
+    { cout << " list is empty " ; }
+    if (head->data == value)
+    {
+      temp = head;      
+      head = head->next; 
+      delete temp;     
+    }
+    while (temp != NULL && temp->data != value)
+    {
+      q = temp;      
+      temp = temp->next; 
+    }
+    if (temp == NULL)
+      {
+        cout << "item not found " ;
+      }
+    q->next = temp->next;
+    delete temp; 
+  }
+
   int deleteFromHead()
   {
     if (isEmpty())
@@ -138,7 +163,7 @@ public:
     Node *temp = head;
     while (temp != NULL)
     {
-      if (temp->data % 2)
+      if (temp->data % 2) // لو باقي القسمة على 2 = 1 ، يبقى الرقم فردي والشرط يتحقق
         sum += temp->data;
       temp = temp->next;
     }
@@ -148,7 +173,7 @@ public:
   {
     LinkedList newList;
     Node *temp = head;
-    while (temp!= NULL)
+    while (temp != NULL)
     {
       newList.insertLast(temp->data);
       temp = temp->next;
@@ -158,11 +183,11 @@ public:
   ~LinkedList()
   {
     Node *p = head, *q;
-    while (p->next != 0)
+    while (p != NULL)
     {
-      q = p->next;
-      delete p;
-      p = q;
+      q = p;
+      p = p->next;
+      delete q;
     }
   }
 };
